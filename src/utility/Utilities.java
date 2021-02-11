@@ -16,7 +16,7 @@ public class Utilities {
     /**Read the config.properties file and return the property value*/
     public String getProperties(String property) throws IOException{
         Properties prop = new Properties();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("configurations/config.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("configurations/config.properties");
         prop.load(inputStream);
         return prop.getProperty(property);
     }
