@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import utility.*;
 
 public class NumberGuess {
-    int userAge = 0, numVal = 0, guessedNum = 0, randomVal = 0, userRewards = 0, maxAttempts = 0, attemptsTaken=0, winAmount=0, loseAmount=0, validGuessno = 0;
+    int userAge = 0, numVal = 0, guessedNum = 0, randomVal = 0, userRewards = 0, maxAttempts = 0, attemptsTaken=0, winAmount=0, loseAmount=0, validGuess = 0;
     boolean valid = false;
 
     /** Accept number from user which would be in between 1 and number entered by user*/
@@ -25,14 +25,12 @@ public class NumberGuess {
     public void generateRandomGuess(){
         try{
             Utilities ut = new Utilities();
-            maxAttempts = Integer.parseInt(ut.getProperties("noofAttempts"));
+            maxAttempts = Integer.parseInt(ut.getProperties("noOfAttempts"));
             winAmount = Integer.parseInt(ut.getProperties("winAmount"));
             loseAmount = Integer.parseInt(ut.getProperties("loseAmount"));
-            userRewards = Integer.parseInt(ut.getProperties("userRewards"));
             System.out.println("What's your age: ");
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             userAge = Integer.parseInt(br.readLine().replaceAll("\\s", ""));
-            System.out.println(userAge);
             if (userAge> Integer.parseInt(ut.getProperties("userMinAge")) && userAge<Integer.parseInt(ut.getProperties("userMaxAge"))){
                 while(!valid){
                     System.out.println("Choose a number greater than " + userAge);
@@ -46,16 +44,16 @@ public class NumberGuess {
                     }
                 }
                 randomVal = ut.randomNum(numVal);
-                System.out.println("RANDOM NO: "+ randomVal);
+                System.out.println("Random No: " + randomVal);
                 while(attemptsTaken!=maxAttempts){
-                    validGuessno = acceptGuessedNumber(numVal);
-                    if(validGuessno == 0){
+                    validGuess = acceptGuessedNumber(numVal);
+                    if(validGuess == 0){
                         System.out.println("Please enter valid number");
-                    }else if(validGuessno == randomVal){
-                        userRewards = winAmount - (100 * attemptsTaken);
-                        System.out.println("Congrats you won $" + userRewards +" for choosing number " + validGuessno);
+                    }else if(validGuess == randomVal){
+                        userRewards = winAmount - (loseAmount * attemptsTaken);
+                        System.out.println("****Congrats you won $" + userRewards +" for choosing number " + validGuess + "****");
                         break;
-                    }else if(validGuessno < randomVal){
+                    }else if(validGuess < randomVal){
                         System.out.println("Guess Again!! Lower than the actual");
                     }else {
                         System.out.println("Guess Again!! Higher than the actual");
