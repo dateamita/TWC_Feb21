@@ -1,5 +1,6 @@
 package utility;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -16,8 +17,8 @@ public class Utilities {
     /**Read the config.properties file and return the property value*/
     public String getProperties(String property) throws IOException{
         Properties prop = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("configurations/config.properties");
-        prop.load(inputStream);
+        FileInputStream objFile = new FileInputStream(System.getProperty("user.dir")+"\\config.properties");
+        prop.load(objFile);
         return prop.getProperty(property);
     }
 }
