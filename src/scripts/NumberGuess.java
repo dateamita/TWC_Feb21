@@ -44,7 +44,6 @@ public class NumberGuess {
                     }
                 }
                 randomVal = ut.randomNum(numVal);
-                System.out.println("Random No: " + randomVal);
                 while(attemptsTaken!=maxAttempts){
                     validGuess = acceptGuessedNumber(numVal);
                     if(validGuess == 0){
